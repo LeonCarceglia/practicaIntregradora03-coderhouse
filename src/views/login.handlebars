@@ -1,0 +1,21 @@
+<div>
+
+    <h1>Login here!</h1>
+
+    <form id="loginForm">
+
+        <label>Email</label>
+        <input name="email">
+
+        <label>Password</label>
+        <input type="password" name="password">
+
+        <input type="submit">
+    </form>
+    <button onclick="window.location.href='/register'">Register</button>
+    <a href="/api/sessions/github"><button>LogIn with GitHub</button></a>
+    <button onclick="window.location.href='/resetPass'">Reset Password</button>
+
+</div>
+
+<script src="/js/login.js"></script>

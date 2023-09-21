@@ -1,0 +1,15 @@
+<h1>Cart Products</h1>
+
+{{#if cart}}
+  <ul>
+    {{#each cart}}
+      <p>--------------------------------------------------</p>
+      <li>{{this.product.title}}</li>
+      <li>{{this.product.description}}</li>
+      <li>{{this.product.price}}</li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No products in cart.</p>
+{{/if}}
+

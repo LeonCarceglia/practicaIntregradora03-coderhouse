@@ -1,0 +1,33 @@
+<h1>Products</h1>
+
+<div>
+  Hello, {{user.first_name}} {{user.last_name}}!
+</div>
+
+<ul>
+  {{#each products}}
+  <p>--------------------------------------------------</p>
+  <li>
+    <p>Title: {{title}}</p>
+    <p>Description: {{description}}</p>
+    <p>Price: {{price}}</p>
+    <p>Category: {{category}}</p>
+    <p>Quantity: {{stock}}</p>
+    <form class="addToCartForm" data-cart="{{this.cart}}" data-product-id="{{this._id}}" method="POST" target="_self">
+      <label for="quantity">Quantity:</label>
+      <input type="number" class="quantity" name="quantity" min="1" max="" value="0">
+      <button type="submt" class="addToCartButton">Add to Cart</button>
+    </form>
+  </li>
+  {{/each}}
+</ul>
+{{#if paginationInfo.prevPage}}
+  <a href="/products?page={{paginationInfo.prevPage}}" class="page-button">Last page</a>
+{{/if}}
+{{#if paginationInfo.hasNextPage}}
+  <a href="/products?page={{paginationInfo.nextPage}}" class="page-button">Next page</a>
+{{/if}}
+<script src="/js/addProductToCart.js"></script>
+<div>
+  <a href="/logout">Logout</a>
+</div>
