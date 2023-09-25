@@ -17,7 +17,7 @@ export default class ViewsRouter extends CustomRouter {
 
         this.get("/current", ["PUBLIC"], viewsController.current)
 
-        this.get("/chat", ["USER"], viewsController.chat)
+        this.get("/chat", ["USER", "PREMIUM"], viewsController.chat)
 
         this.get("/loggerTest", ["ADMIN"], viewsController.loggerTest)
 

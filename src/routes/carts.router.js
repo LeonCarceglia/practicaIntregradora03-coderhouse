@@ -9,7 +9,7 @@ export default class CartsRouter extends CustomRouter {
 
         this.get("/:id", ["PUBLIC"], cartsController.getCart)
 
-        this.post("/:cid/product/:pid/:quantity?", ["USER"], cartsController.addProductToCart)
+        this.post("/:cid/product/:pid/:quantity?", ["USER", "PREMIUM"], cartsController.addProductToCart)
 
         this.delete("/:cid/products/:pid", ["PUBLIC"], cartsController.deleteProduct)
 

@@ -2,6 +2,7 @@ import { productService } from "../services/index.js"
 import CustomErrors from "../services/errors/Custom.errors.js"
 import { generateProductErrorInfo } from "../services/errors/Info.errors.js"
 import EnumErrors from "../services/errors/Enum.errors.js"
+import UserRepository from "../repositories/Users.repository.js"
 
 const getProducts = async (req, res) => {
     const currentUrl = req.protocol + "://" + req.get("host") + req.originalUrl
@@ -29,8 +30,13 @@ const updateProduct = async (req, res) => {
         } else {
             const { id } = req.params
             const newProduct = req.body
-            const updatedProduct = await productService.updateProduct(id, newProduct)
-            res.json({ status: "ok", data: updatedProduct })
+            const user = req.session.user
+            const updatedProduct = await productService.updateProduct(id, newProduct, user)
+            if (typeof updatedProduct === 'string') {
+                res.json({ status: "forbidden", message: updatedProduct })
+            } else {
+                res.json({ status: "ok", data: updatedProduct })
+            }
         }
     } catch (error) {
         throw error
@@ -58,8 +64,13 @@ const createProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
     const { id } = req.params
-    await productService.deleteProduct(id)
-    res.sendStatus(204)
+    const user = req.session.user
+    const deleteProduct = await productService.deleteProduct(id, user)
+    if (typeof deleteProduct === 'string') {
+        res.json({ status: "forbidden", message: deleteProduct })
+    } else {
+        res.sendStatus(204)
+    }
 }
 
 const generateProductsMock = async (req, res) => {

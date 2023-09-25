@@ -32,13 +32,13 @@ class ProductsRepository{
         }
     }
 
-    async updateProduct(id, product){
-        return await this.dao.updateProduct(id, product)
+    async updateProduct(id, product, user){
+        return await this.dao.updateProduct(id, product, user)
     }
 
-    async deleteProduct (id){
+    async deleteProduct (id, user){
         try{
-            return await this.dao.deleteProduct(id)
+            return await this.dao.deleteProduct(id, user)
         }
         catch(error){
             throw(error)

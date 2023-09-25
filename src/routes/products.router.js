@@ -7,11 +7,11 @@ export default class ProductsRouter extends CustomRouter {
 
         this.get("/:id", ["PUBLIC"], productsController.getProduct)
 
-        this.put("/:id", ["ADMIN"], productsController.updateProduct)
+        this.put("/:id", ["ADMIN", "PREMIUM"], productsController.updateProduct)
 
         this.post("/", ["ADMIN", "PREMIUM"], productsController.createProduct)
 
-        this.delete("/:id", ["ADMIN"], productsController.deleteProduct)
+        this.delete("/:id", ["ADMIN", "PREMIUM"], productsController.deleteProduct)
         
         this.post("/mockingproducts", ["ADMIN"], productsController.generateProductsMock)
     }

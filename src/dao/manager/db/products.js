@@ -55,12 +55,24 @@ export default class ProductsManager {
         return productModel.create(product)
     }
 
-    updateProduct = (id, product) => {
-        return productModel.findByIdAndUpdate(id, product)
+    updateProduct = async (id, product, user) => {
+        const productSearch = await productModel.findByIdAndUpdate(id, product)
+        if (productSearch.owner === user.email || "admin" === user.role){
+            return productSearch
+        }
+        else{
+            return "Only owner or admin can updated product"
+        }
     }
 
-    deleteProduct = (id) => {
-        return productModel.findByIdAndDelete(id)
+    deleteProduct = async (id, user) => {
+        const productDelete = await productModel.findByIdAndDelete(id)
+        if (productDelete.owner === user.email || "admin" === user.role){
+            return productDelete
+        }
+        else{
+            return "Only owner or admin can delete product"
+        }
     }
 
     getProductsRender = async (page) => {
